@@ -8,17 +8,42 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
-//What is the TC?
+// cache example
+const isUnique = (arr) => {
+  const cache = {};
+  let result = true;
 
-var countChars = function(str) {
-  var count = 0;
-
-  for (var i = 0; i < str.length; i++) {
-    count++;
+  for (let i = 0; i < arr.length; i++) {
+    console.log(`~~~LOOP~~~ i === ${i}`);
+    if (cache[arr[i]]) {
+      return false
+    } else {
+      cache[arr[i]] = true;
+    }
   }
 
-  return count;
+  return result;
+}
+
+console.log('isUnique 1', isUnique([1, 2, 3]));
+console.log('isUnique 2', isUnique([1, 1, 3]));
+
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Unique sort');
+//___________________________________Unique sort
+
+const uniqueSort = function(arr) {
+  const cache = {};
+  const result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!cache[arr[i]]) {
+      result.push(arr[i]);
+      cache[arr[i]] = true
+    }
+  }
+
+  return result.sort((a, b) => a - b);
 };
 
-countChars("dance");
-countChars("walk");
+uniqueSort([4,2,2,3,2,2,2]);
+console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]))

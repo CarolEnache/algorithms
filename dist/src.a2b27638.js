@@ -194,20 +194,47 @@ module.hot.accept(reloadCSS);
 
 require("./styles.css");
 
-document.getElementById("app").innerHTML = "\n<h1>Hello Vanilla!</h1>\n<div>\n  We use Parcel to bundle this sandbox, you can find more info about Parcel\n  <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.\n</div>\n"; //What is the TC?
+document.getElementById("app").innerHTML = "\n<h1>Hello Vanilla!</h1>\n<div>\n  We use Parcel to bundle this sandbox, you can find more info about Parcel\n  <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>.\n</div>\n"; // cache example
 
-var countChars = function countChars(str) {
-  var count = 0;
+var isUnique = function isUnique(arr) {
+  var cache = {};
+  var result = true;
 
-  for (var i = 0; i < str.length; i++) {
-    count++;
+  for (var i = 0; i < arr.length; i++) {
+    console.log("~~~LOOP~~~ i === ".concat(i));
+
+    if (cache[arr[i]]) {
+      return false;
+    } else {
+      cache[arr[i]] = true;
+    }
   }
 
-  return count;
+  return result;
 };
 
-countChars("dance");
-countChars("walk");
+console.log('isUnique 1', isUnique([1, 2, 3]));
+console.log('isUnique 2', isUnique([1, 1, 3]));
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Unique sort'); //___________________________________Unique sort
+
+var uniqueSort = function uniqueSort(arr) {
+  var cache = {};
+  var result = [];
+
+  for (var i = 0; i < arr.length; i++) {
+    if (!cache[arr[i]]) {
+      result.push(arr[i]);
+      cache[arr[i]] = true;
+    }
+  }
+
+  return result.sort(function (a, b) {
+    return a - b;
+  });
+};
+
+uniqueSort([4, 2, 2, 3, 2, 2, 2]);
+console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]));
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
