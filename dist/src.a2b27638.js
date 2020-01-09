@@ -263,6 +263,35 @@ var memoTimes10 = function memoTimes10(n) {
 
 console.log(memoTimes10(9), 'calculating');
 console.log(memoTimes10(9), 'calculated');
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoization with Closure');
+
+var memoizedClosureTimes10 = function memoizedClosureTimes10(n) {
+  var closureCache = {};
+  return function (n) {
+    console.log('closureCache 1', closureCache);
+
+    if (n in closureCache) {
+      console.log('closureCache 2', closureCache);
+      console.log('Fetching from cache', n);
+      return closureCache[n];
+    } else {
+      console.log('closureCache 3', closureCache);
+      console.log('Calculating result');
+      var result = times10(n);
+      closureCache[n] = result;
+      return result;
+    }
+  };
+};
+
+var memoClosureTimes10 = memoizedClosureTimes10();
+
+try {
+  console.log(memoClosureTimes10(9), 'calculating');
+  console.log(memoClosureTimes10(9), 'calculated');
+} catch (e) {
+  console.error('Memoization with Closure ERROR: ', e);
+}
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
