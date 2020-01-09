@@ -292,6 +292,43 @@ try {
 } catch (e) {
   console.error('Memoization with Closure ERROR: ', e);
 }
+
+;
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Generic Memoize Function');
+
+var genericMemoizedFunction = function genericMemoizedFunction(cb) {
+  var genericMemoCache = {};
+  return function () {
+    console.log('genericMemoCache 1', genericMemoCache);
+
+    for (var _len = arguments.length, n = new Array(_len), _key = 0; _key < _len; _key++) {
+      n[_key] = arguments[_key];
+    }
+
+    if (n in genericMemoCache) {
+      console.log('genericMemoCache 2', genericMemoCache);
+      console.log('Fetching from cache', n);
+      return genericMemoCache[n];
+    } else {
+      console.log('genericMemoCache 3', genericMemoCache);
+      console.log('Calculating result');
+      var result = cb.apply(void 0, n);
+      genericMemoCache[n] = result;
+      return result;
+    }
+  };
+};
+
+var genericMemoFunc = genericMemoizedFunction(times10);
+
+try {
+  console.log(genericMemoFunc(9), 'calculating');
+  console.log(genericMemoFunc(9), 'calculated');
+} catch (e) {
+  console.error('Memoization with Closure ERROR: ', e);
+}
+
+;
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

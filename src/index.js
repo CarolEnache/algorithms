@@ -104,7 +104,39 @@ try {
   console.log(memoClosureTimes10(9), 'calculated');
 } catch(e) {
   console.error('Memoization with Closure ERROR: ', e)
-}
+};
+
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Generic Memoize Function');
+
+const genericMemoizedFunction = (cb) => {
+  const genericMemoCache = {};
+
+  return (...n) => {
+    console.log('genericMemoCache 1', genericMemoCache)
+    if (n in genericMemoCache) {
+      console.log('genericMemoCache 2', genericMemoCache)
+      console.log('Fetching from cache', n);
+      return genericMemoCache[n];
+    } else {
+      console.log('genericMemoCache 3', genericMemoCache)
+      console.log('Calculating result');
+      let result = cb(...n);
+      genericMemoCache[n] = result;
+      return result
+    }
+  }
+};
+
+const genericMemoFunc = genericMemoizedFunction(times10);
+
+try {
+  console.log(genericMemoFunc(9), 'calculating');
+  console.log(genericMemoFunc(9), 'calculated');
+} catch (e) {
+  console.error('Memoization with Closure ERROR: ', e)
+};
+
+
 
 
 
