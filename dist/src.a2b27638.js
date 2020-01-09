@@ -235,6 +235,34 @@ var uniqueSort = function uniqueSort(arr) {
 
 uniqueSort([4, 2, 2, 3, 2, 2, 2]);
 console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]));
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Basic memoization');
+
+var times10 = function times10(n) {
+  return n * 10;
+};
+
+times10(9);
+console.log(times10(9));
+var basicMemoCache = {};
+
+var memoTimes10 = function memoTimes10(n) {
+  console.log('basicMemoCache 1', basicMemoCache);
+
+  if (n in basicMemoCache) {
+    console.log('basicMemoCache 2', basicMemoCache);
+    console.log('Fetching from cache', n);
+    return basicMemoCache[n];
+  } else {
+    console.log('basicMemoCache 3', basicMemoCache);
+    console.log('Calculating result');
+    var result = times10(n);
+    basicMemoCache[n] = result;
+    return result;
+  }
+};
+
+console.log(memoTimes10(9), 'calculating');
+console.log(memoTimes10(9), 'calculated');
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

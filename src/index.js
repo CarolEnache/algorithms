@@ -47,3 +47,35 @@ const uniqueSort = function(arr) {
 
 uniqueSort([4,2,2,3,2,2,2]);
 console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]))
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Basic memoization');
+
+const times10 = (n) => {
+  return n * 10
+};
+
+times10(9);
+console.log(times10(9));
+
+const basicMemoCache = {};
+
+const memoTimes10 = (n) => {
+  console.log('basicMemoCache 1', basicMemoCache)
+  if (n in basicMemoCache) {
+    console.log('basicMemoCache 2', basicMemoCache)
+    console.log('Fetching from cache', n);
+    return basicMemoCache[n];
+  } else {
+    console.log('basicMemoCache 3', basicMemoCache)
+    console.log('Calculating result');
+    let result = times10(n);
+    basicMemoCache[n] = result;
+    return result
+  }
+};
+
+console.log(memoTimes10(9), 'calculating')
+console.log(memoTimes10(9), 'calculated')
+
+
+
+
