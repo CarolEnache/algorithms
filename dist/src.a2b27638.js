@@ -390,7 +390,20 @@ console.log(memoRF(5), 'calculated');
 console.log(memoRF(6), 'calculated');
 console.log(memoRF(5), 'calculated');
 console.log(memoRF(5), 'calculated');
-console.log(memoRF(5), 'calculated'); // console.log(factorial(6))
+console.log(memoRF(5), 'calculated');
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Linear Search');
+
+function linearSearch(list, item) {
+  var index = -1;
+  list.forEach(function (listItem, i) {
+    if (listItem === item) {
+      index = i;
+    }
+  });
+  return index;
+}
+
+console.log(linearSearch([2, 6, 7, 90, 103], 90));
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
