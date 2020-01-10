@@ -137,6 +137,7 @@ try {
 };
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoized Factorial in Closure');
+
 function memoFactorial(n) {
   const cache = {}
 
@@ -162,3 +163,41 @@ console.log(memoFact(5), 'calculated')
 console.log(memoFact(6), 'calculating')
 console.log(memoFact(5), 'calculated')
 console.log(memoFact(6), 'calculated')
+
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Recursive Memoized Factorial');
+
+function memoRecursiveFactorial(callbackFactorial) {
+  const cache = {}
+
+  return (number) => {
+    if(cache[number]) {
+      return cache[number]
+    } else {
+      let result = callbackFactorial(number)
+      cache[number] = result
+      return result
+    }
+  }
+}
+
+function factorial(n) {
+  if (n === 1) {
+    return 1
+  } else {
+    console.log(`number ${factorial(n - 1)} * ${n} = ${ n * factorial(n - 1)}`)
+    return n * factorial(n - 1)
+  }
+};
+
+const memoRF = memoRecursiveFactorial(factorial);
+console.log(memoRF(5), 'calculating')
+console.log(memoRF(5), 'calculated')
+console.log(memoRF(6), 'calculated')
+console.log(memoRF(5), 'calculated')
+console.log(memoRF(5), 'calculated')
+console.log(memoRF(6), 'calculated')
+console.log(memoRF(5), 'calculated')
+console.log(memoRF(5), 'calculated')
+console.log(memoRF(5), 'calculated')
+
+// console.log(factorial(6))

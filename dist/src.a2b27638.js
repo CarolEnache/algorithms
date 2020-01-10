@@ -356,6 +356,41 @@ console.log(memoFact(5), 'calculated');
 console.log(memoFact(6), 'calculating');
 console.log(memoFact(5), 'calculated');
 console.log(memoFact(6), 'calculated');
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Recursive Memoized Factorial');
+
+function memoRecursiveFactorial(callbackFactorial) {
+  var cache = {};
+  return function (number) {
+    if (cache[number]) {
+      return cache[number];
+    } else {
+      var result = callbackFactorial(number);
+      cache[number] = result;
+      return result;
+    }
+  };
+}
+
+function factorial(n) {
+  if (n === 1) {
+    return 1;
+  } else {
+    console.log("number ".concat(factorial(n - 1), " * ").concat(n, " = ").concat(n * factorial(n - 1)));
+    return n * factorial(n - 1);
+  }
+}
+
+;
+var memoRF = memoRecursiveFactorial(factorial);
+console.log(memoRF(5), 'calculating');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(6), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(6), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated'); // console.log(factorial(6))
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
