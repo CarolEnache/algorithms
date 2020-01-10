@@ -404,6 +404,29 @@ function linearSearch(list, item) {
 }
 
 console.log(linearSearch([2, 6, 7, 90, 103], 90));
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Binary Search');
+
+function binarySearch(list, item) {
+  var min = 0;
+  var max = list.length - 1;
+  var guess;
+
+  while (min <= max) {
+    guess = Math.floor(min + max / 2);
+
+    if (list[guess] === item) {
+      return list[guess];
+    } else if (list[guess] < item) {
+      min = guess++;
+    } else if (list[guess] > item) {
+      max = guess--;
+    }
+
+    return list[guess];
+  }
+}
+
+console.log(binarySearch([2, 6, 7, 90, 103], 90));
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
