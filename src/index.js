@@ -136,8 +136,29 @@ try {
   console.error('Memoization with Closure ERROR: ', e)
 };
 
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoized Factorial in Closure');
+function memoFactorial(n) {
+  const cache = {}
 
+    return (n) => {
+      var result = 1
+      if (n in cache) {
+        return cache[n]
+      } else {
+        for(var i = 2; i <= n; i++) {
+          console.log(`result ${result} * number ${n} =  ${result * n}`)
+          result *= i
+        }
+        cache[n] = result
+        return result
+      }
+    }
+}
 
+const memoFact = memoFactorial();
 
-
-
+console.log(memoFact(5), 'calculating')
+console.log(memoFact(5), 'calculated')
+console.log(memoFact(6), 'calculating')
+console.log(memoFact(5), 'calculated')
+console.log(memoFact(6), 'calculated')

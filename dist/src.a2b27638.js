@@ -329,6 +329,33 @@ try {
 }
 
 ;
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoized Factorial in Closure');
+
+function memoFactorial(n) {
+  var cache = {};
+  return function (n) {
+    var result = 1;
+
+    if (n in cache) {
+      return cache[n];
+    } else {
+      for (var i = 2; i <= n; i++) {
+        console.log("result ".concat(result, " * number ").concat(n, " =  ").concat(result * n));
+        result *= i;
+      }
+
+      cache[n] = result;
+      return result;
+    }
+  };
+}
+
+var memoFact = memoFactorial();
+console.log(memoFact(5), 'calculating');
+console.log(memoFact(5), 'calculated');
+console.log(memoFact(6), 'calculating');
+console.log(memoFact(5), 'calculated');
+console.log(memoFact(6), 'calculated');
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
