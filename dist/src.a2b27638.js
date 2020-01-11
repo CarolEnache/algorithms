@@ -427,6 +427,37 @@ function binarySearch(list, item) {
 }
 
 console.log(binarySearch([2, 6, 7, 90, 103], 90));
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Implement Bubblesort'); // [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+function swap(array, i, j) {
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+  console.log(array, array[i], array[j], 'swap');
+}
+
+console.log(swap([1, 2, 3, 4, 5], 3, 4), 'swap');
+
+function BubblesortBasic(array) {
+  for (var i = 0; i < array.length; i++) {
+    for (var j = 1; j < array.length; j++) {
+      console.log('j: ', array[j]);
+      console.log('i: ', array[i]);
+      console.log(array[j - 1] > array[j]);
+
+      if (array[j - 1] > array[j]) {
+        // [array[j], array[i]] = [array[i], array[j]]
+        swap(array, j - 1, j);
+      }
+    }
+  }
+
+  return array;
+}
+
+console.log(BubblesortBasic([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]));
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -455,7 +486,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49566" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
