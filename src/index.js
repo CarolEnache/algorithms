@@ -371,3 +371,54 @@ function mergeSort(list) {
 mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]) //returns [1,2,3,4,5,6,7,8,9,10]
 
 console.log(mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]))
+
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Greedy Algorithm');
+
+function greedyChange(amount) {
+  const options = [25, 10, 5]
+  let result = [];
+  let left = amount;
+
+  const twentyFife = (amount) => {
+     if (left < options[0]) {
+       return fifteen(amount)
+     }
+    result.push(options[0])
+    left = amount - options[0]
+    return twentyFife(amount - options[0])
+  }
+
+  const fifteen = (amount) => {
+     if (left === options[1]) {
+       return result.push(options[1])
+     } else if (left < options[1]) {
+       return result.push(options[2])
+     }
+    result.push(options[1])
+    left = amount - options[1]
+    return fifteen(amount - options[0])
+  }
+  twentyFife(amount)
+  return result
+}
+
+console.log(greedyChange(35))
+
+const makeChange = (coins, amount) => {
+  coins.sort((a, b) => b -a);
+  let coinTotal = 0;
+  let i = 0;
+
+  while (amount > 0) {
+    if (coins[i] <= amount) {
+      amount -= coins[i];
+      coinTotal++;
+    } else {
+      i++
+    }
+  }
+  return coinTotal;
+}
+
+console.log(makeChange([5, 10, 25], 100))
+
