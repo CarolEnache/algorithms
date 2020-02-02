@@ -7,9 +7,13 @@
     "start": "parcel index.html --open",
     "build": "parcel build index.html"
   },
-  "dependencies": {},
+  "dependencies": {
+    "regenerator-runtime": "^0.13.3"
+  },
   "devDependencies": {
     "@babel/core": "7.2.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.7.0",
     "parcel-bundler": "^1.6.1"
   },
   "keywords": []

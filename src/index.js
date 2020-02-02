@@ -1,29 +1,29 @@
-import "./styles.css";
+import './styles.css';
+import 'regenerator-runtime/runtime';
 
-document.getElementById("app").innerHTML = `
-<h1>Hello Vanilla!</h1>
+document.getElementById('app').innerHTML = `
+<h1>Hello Algorithms!</h1>
 <div>
-  We use Parcel to bundle this sandbox, you can find more info about Parcel
-  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
+  Open the console to see the magic
 </div>
 `;
 
 // cache example
-const isUnique = (arr) => {
+const isUnique = arr => {
   const cache = {};
   let result = true;
 
   for (let i = 0; i < arr.length; i++) {
     console.log(`~~~LOOP~~~ i === ${i}`);
     if (cache[arr[i]]) {
-      return false
+      return false;
     } else {
       cache[arr[i]] = true;
     }
   }
 
   return result;
-}
+};
 
 console.log('isUnique 1', isUnique([1, 2, 3]));
 console.log('isUnique 2', isUnique([1, 1, 3]));
@@ -38,19 +38,19 @@ const uniqueSort = function(arr) {
   for (let i = 0; i < arr.length; i++) {
     if (!cache[arr[i]]) {
       result.push(arr[i]);
-      cache[arr[i]] = true
+      cache[arr[i]] = true;
     }
   }
 
   return result.sort((a, b) => a - b);
 };
 
-uniqueSort([4,2,2,3,2,2,2]);
-console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]))
+uniqueSort([4, 2, 2, 3, 2, 2, 2]);
+console.log(uniqueSort([4, 2, 2, 3, 2, 2, 2]));
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Basic memoization');
 
-const times10 = (n) => {
-  return n * 10
+const times10 = n => {
+  return n * 10;
 };
 
 times10(9);
@@ -58,43 +58,43 @@ console.log(times10(9));
 
 const basicMemoCache = {};
 
-const memoTimes10 = (n) => {
-  console.log('basicMemoCache 1', basicMemoCache)
+const memoTimes10 = n => {
+  console.log('basicMemoCache 1', basicMemoCache);
   if (n in basicMemoCache) {
-    console.log('basicMemoCache 2', basicMemoCache)
+    console.log('basicMemoCache 2', basicMemoCache);
     console.log('Fetching from cache', n);
     return basicMemoCache[n];
   } else {
-    console.log('basicMemoCache 3', basicMemoCache)
+    console.log('basicMemoCache 3', basicMemoCache);
     console.log('Calculating result');
     let result = times10(n);
     basicMemoCache[n] = result;
-    return result
+    return result;
   }
 };
 
-console.log(memoTimes10(9), 'calculating')
-console.log(memoTimes10(9), 'calculated')
+console.log(memoTimes10(9), 'calculating');
+console.log(memoTimes10(9), 'calculated');
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoization with Closure');
 
-const memoizedClosureTimes10 = (n) => {
+const memoizedClosureTimes10 = n => {
   const closureCache = {};
 
-  return (n) => {
-    console.log('closureCache 1', closureCache)
+  return n => {
+    console.log('closureCache 1', closureCache);
     if (n in closureCache) {
-      console.log('closureCache 2', closureCache)
+      console.log('closureCache 2', closureCache);
       console.log('Fetching from cache', n);
       return closureCache[n];
     } else {
-      console.log('closureCache 3', closureCache)
+      console.log('closureCache 3', closureCache);
       console.log('Calculating result');
       let result = times10(n);
       closureCache[n] = result;
-      return result
+      return result;
     }
-  }
+  };
 };
 
 const memoClosureTimes10 = memoizedClosureTimes10();
@@ -102,29 +102,29 @@ const memoClosureTimes10 = memoizedClosureTimes10();
 try {
   console.log(memoClosureTimes10(9), 'calculating');
   console.log(memoClosureTimes10(9), 'calculated');
-} catch(e) {
-  console.error('Memoization with Closure ERROR: ', e)
-};
+} catch (e) {
+  console.error('Memoization with Closure ERROR: ', e);
+}
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Generic Memoize Function');
 
-const genericMemoizedFunction = (cb) => {
+const genericMemoizedFunction = cb => {
   const genericMemoCache = {};
 
   return (...n) => {
-    console.log('genericMemoCache 1', genericMemoCache)
+    console.log('genericMemoCache 1', genericMemoCache);
     if (n in genericMemoCache) {
-      console.log('genericMemoCache 2', genericMemoCache)
+      console.log('genericMemoCache 2', genericMemoCache);
       console.log('Fetching from cache', n);
       return genericMemoCache[n];
     } else {
-      console.log('genericMemoCache 3', genericMemoCache)
+      console.log('genericMemoCache 3', genericMemoCache);
       console.log('Calculating result');
       let result = cb(...n);
       genericMemoCache[n] = result;
-      return result
+      return result;
     }
-  }
+  };
 };
 
 const genericMemoFunc = genericMemoizedFunction(times10);
@@ -133,78 +133,78 @@ try {
   console.log(genericMemoFunc(9), 'calculating');
   console.log(genericMemoFunc(9), 'calculated');
 } catch (e) {
-  console.error('Memoization with Closure ERROR: ', e)
-};
+  console.error('Memoization with Closure ERROR: ', e);
+}
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Memoized Factorial in Closure');
 
 function memoFactorial(n) {
-  const cache = {}
+  const cache = {};
 
-    return (n) => {
-      var result = 1
-      if (n in cache) {
-        return cache[n]
-      } else {
-        for(var i = 2; i <= n; i++) {
-          console.log(`result ${result} * number ${n} =  ${result * n}`)
-          result *= i
-        }
-        cache[n] = result
-        return result
+  return n => {
+    var result = 1;
+    if (n in cache) {
+      return cache[n];
+    } else {
+      for (var i = 2; i <= n; i++) {
+        console.log(`result ${result} * number ${n} =  ${result * n}`);
+        result *= i;
       }
+      cache[n] = result;
+      return result;
     }
+  };
 }
 
 const memoFact = memoFactorial();
 
-console.log(memoFact(5), 'calculating')
-console.log(memoFact(5), 'calculated')
-console.log(memoFact(6), 'calculating')
-console.log(memoFact(5), 'calculated')
-console.log(memoFact(6), 'calculated')
+console.log(memoFact(5), 'calculating');
+console.log(memoFact(5), 'calculated');
+console.log(memoFact(6), 'calculating');
+console.log(memoFact(5), 'calculated');
+console.log(memoFact(6), 'calculated');
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Recursive Memoized Factorial');
 
 function memoRecursiveFactorial(callbackFactorial) {
-  const cache = {}
+  const cache = {};
 
-  return (number) => {
-    if(cache[number]) {
-      return cache[number]
+  return number => {
+    if (cache[number]) {
+      return cache[number];
     } else {
-      let result = callbackFactorial(number)
-      cache[number] = result
-      return result
+      let result = callbackFactorial(number);
+      cache[number] = result;
+      return result;
     }
-  }
+  };
 }
 
 function factorial(n) {
   if (n === 1) {
-    return 1
+    return 1;
   } else {
-    console.log(`number ${factorial(n - 1)} * ${n} = ${ n * factorial(n - 1)}`)
-    return n * factorial(n - 1)
+    console.log(`number ${factorial(n - 1)} * ${n} = ${n * factorial(n - 1)}`);
+    return n * factorial(n - 1);
   }
-};
+}
 
 const memoRF = memoRecursiveFactorial(factorial);
-console.log(memoRF(5), 'calculating')
-console.log(memoRF(5), 'calculated')
-console.log(memoRF(6), 'calculated')
-console.log(memoRF(5), 'calculated')
-console.log(memoRF(5), 'calculated')
-console.log(memoRF(6), 'calculated')
-console.log(memoRF(5), 'calculated')
-console.log(memoRF(5), 'calculated')
-console.log(memoRF(5), 'calculated')
+console.log(memoRF(5), 'calculating');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(6), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(6), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated');
+console.log(memoRF(5), 'calculated');
 
 function memoCesar(fn) {
   const cacheArr = [];
   const cache = [];
 
-  return function () {
+  return function() {
     const hash = Array.prototype.slice.call(arguments).toString();
     const index = cacheArr.indexOf(hash);
     if (index > -1) {
@@ -216,7 +216,7 @@ function memoCesar(fn) {
       cache[i] = result;
       return result;
     }
-  }
+  };
 }
 
 const useMemoCesar = (obj, fn) => {
@@ -225,7 +225,7 @@ const useMemoCesar = (obj, fn) => {
 };
 
 const lib = {
-  factorial: (n) => {
+  factorial: n => {
     if (n === 1) {
       return 1;
     } else {
@@ -238,7 +238,7 @@ const lib = {
       }
       return thisFactorial;
     }
-  },
+  }
 };
 
 useMemoCesar(lib, 'factorial');
@@ -248,7 +248,6 @@ console.log(lib.factorial(4), 'calculated 4');
 console.log(lib.factorial(3), 'calculated 3');
 console.log(lib.factorial(2), 'calculated 2');
 
-
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Linear Search');
 
 function linearSearch(list, item) {
@@ -256,32 +255,32 @@ function linearSearch(list, item) {
 
   list.forEach((listItem, i) => {
     if (listItem === item) {
-      index = i
+      index = i;
     }
-  })
-  return index
+  });
+  return index;
 }
 
-console.log(linearSearch([2,6,7,90,103], 90));
+console.log(linearSearch([2, 6, 7, 90, 103], 90));
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Binary Search');
 
 function binarySearch(list, item) {
-  let min = 0
-  let max = list.length -1;
+  let min = 0;
+  let max = list.length - 1;
   let guess;
 
-  while(min <= max) {
+  while (min <= max) {
     guess = Math.floor(min + max / 2);
 
-    if(list[guess] === item) {
-      return list[guess]
+    if (list[guess] === item) {
+      return list[guess];
     } else if (list[guess] < item) {
-      min = guess ++
+      min = guess++;
     } else if (list[guess] > item) {
-      max = guess --
+      max = guess--;
     }
-    return list[guess]
+    return list[guess];
   }
 }
 
@@ -294,50 +293,50 @@ console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Implement basic Bubblesort');
 // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 function swap(array, i, j) {
-  var temp = array[i]
-  array[i] = array[j]
-  array[j] = temp
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
 
 function bubbleSortBasic(array) {
-  let iteration = 0
-  for(var i = 0; i < array.length; i++) {
-    for(var j = 1; j < array.length; j++) {
-      iteration ++
-      if (array[j -1 ] > array[j]) {
-        swap(array, j - 1 , j)
+  let iteration = 0;
+  for (var i = 0; i < array.length; i++) {
+    for (var j = 1; j < array.length; j++) {
+      iteration++;
+      if (array[j - 1] > array[j]) {
+        swap(array, j - 1, j);
       }
     }
   }
-  console.log(iteration)
-  return array
+  console.log(iteration);
+  return array;
 }
 
-console.log(bubbleSortBasic([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]))
+console.log(bubbleSortBasic([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]));
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Implement optimized Bubblesort');
 
 function bubbleSortOptimized(array) {
   let swapped;
-  let iteration = 0
+  let iteration = 0;
 
   do {
-    swapped = false
+    swapped = false;
     for (var i = 0; i < array.length; i++) {
       for (var j = 1; j < array.length; j++) {
-        iteration++
+        iteration++;
         if (array[j - 1] > array[j]) {
-          swap(array, j - 1, j)
+          swap(array, j - 1, j);
           swapped = true;
         }
       }
     }
-  } while(swapped)
-  console.log(iteration)
-  return array
+  } while (swapped);
+  console.log(iteration);
+  return array;
 }
 
-console.log(bubbleSortOptimized([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]))
+console.log(bubbleSortOptimized([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]));
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Implement Merge Sort');
 
@@ -348,64 +347,66 @@ function merge(left, right) {
 
   while (leftIndex < left.length && rightIndex < right.length) {
     if (left[leftIndex] < right[rightIndex]) {
-      sortedArray.push(left[leftIndex])
-      leftIndex++
+      sortedArray.push(left[leftIndex]);
+      leftIndex++;
     } else {
-      sortedArray.push(right[rightIndex])
-      rightIndex++
+      sortedArray.push(right[rightIndex]);
+      rightIndex++;
     }
   }
-  return sortedArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex))
+  return sortedArray
+    .concat(left.slice(leftIndex))
+    .concat(right.slice(rightIndex));
 }
 
 function mergeSort(list) {
   if (list.length === 1) {
-    return list
+    return list;
   }
-    const middle = Math.floor(list.length / 2)
-    const left = list.slice(0, middle);
-    const right = list.slice(middle)
-  return merge(mergeSort(left), mergeSort(right))
+  const middle = Math.floor(list.length / 2);
+  const left = list.slice(0, middle);
+  const right = list.slice(middle);
+  return merge(mergeSort(left), mergeSort(right));
 }
 
-mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]) //returns [1,2,3,4,5,6,7,8,9,10]
+mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]); //returns [1,2,3,4,5,6,7,8,9,10]
 
-console.log(mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]))
+console.log(mergeSort([9, 2, 5, 6, 4, 3, 7, 10, 1, 8]));
 
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Greedy Algorithm');
 
 function greedyChange(amount) {
-  const options = [25, 10, 5]
+  const options = [25, 10, 5];
   let result = [];
   let left = amount;
 
-  const twentyFife = (amount) => {
-     if (left < options[0]) {
-       return fifteen(amount)
-     }
-    result.push(options[0])
-    left = amount - options[0]
-    return twentyFife(amount - options[0])
-  }
+  const twentyFife = amount => {
+    if (left < options[0]) {
+      return fifteen(amount);
+    }
+    result.push(options[0]);
+    left = amount - options[0];
+    return twentyFife(amount - options[0]);
+  };
 
-  const fifteen = (amount) => {
-     if (left === options[1]) {
-       return result.push(options[1])
-     } else if (left < options[1]) {
-       return result.push(options[2])
-     }
-    result.push(options[1])
-    left = amount - options[1]
-    return fifteen(amount - options[0])
-  }
-  twentyFife(amount)
-  return result
+  const fifteen = amount => {
+    if (left === options[1]) {
+      return result.push(options[1]);
+    } else if (left < options[1]) {
+      return result.push(options[2]);
+    }
+    result.push(options[1]);
+    left = amount - options[1];
+    return fifteen(amount - options[0]);
+  };
+  twentyFife(amount);
+  return result;
 }
 
-console.log(greedyChange(35))
+console.log(greedyChange(35));
 
 const makeChange = (coins, amount) => {
-  coins.sort((a, b) => b -a);
+  coins.sort((a, b) => b - a);
   let coinTotal = 0;
   let i = 0;
 
@@ -414,11 +415,31 @@ const makeChange = (coins, amount) => {
       amount -= coins[i];
       coinTotal++;
     } else {
-      i++
+      i++;
     }
   }
   return coinTotal;
-}
+};
 
-console.log(makeChange([5, 10, 25], 100))
+console.log(makeChange([5, 10, 25], 100));
 
+console.log(
+  '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~custom Generator function where we dynamically generate values into the object and iterate over them'
+);
+const numbers = {
+  *[Symbol.iterator]({ start = 0, end = 100, step = 1 } = {}) {
+    for (let i = start; i <= end; i += step) {
+      yield i;
+    }
+  }
+};
+
+// for (let num of numbers) {
+//   console.log(num);
+// }
+
+console.log(
+  `My lucky numbers are: ${[
+    ...numbers[Symbol.iterator]({ start: 6, end: 30, step: 4 })
+  ]}`
+);
