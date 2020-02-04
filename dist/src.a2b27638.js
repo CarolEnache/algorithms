@@ -917,12 +917,68 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
+},{}],"src/fakeData.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var createStore = function createStore() {
+  var tables = {
+    customer: {
+      1: {
+        name: 'John'
+      },
+      2: {
+        name: 'Chris'
+      },
+      3: {
+        name: 'Vic'
+      }
+    },
+    food: {
+      1: ['Cake', 'Waffle'],
+      2: ['Burgers', 'stake'],
+      3: ['Avocado', 'stuff']
+    }
+  };
+  return {
+    get: function get(table, id) {
+      return delay(1000).then(function () {
+        return tables[table][id];
+      });
+    }
+  };
+};
+
+function delay(ms) {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
+}
+
+var _default = createStore;
+exports.default = _default;
 },{}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles.css");
 
-require("regenerator-runtime/runtime");
+var _runtime = require("regenerator-runtime/runtime");
+
+var _fakeData = _interopRequireDefault(require("./fakeData"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _marked =
+/*#__PURE__*/
+regeneratorRuntime.mark(generatorExample);
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -933,6 +989,8 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _asyncIterator(iterable) { var method; if (typeof Symbol !== "undefined") { if (Symbol.asyncIterator) { method = iterable[Symbol.asyncIterator]; if (method != null) return method.call(iterable); } if (Symbol.iterator) { method = iterable[Symbol.iterator]; if (method != null) return method.call(iterable); } } throw new TypeError("Object is not async iterable"); }
 
 document.getElementById('app').innerHTML = "\n<h1>Hello Algorithms!</h1>\n<div>\n  Open the console to see the magic\n</div>\n"; // cache example
 
@@ -1408,7 +1466,187 @@ console.log("My lucky numbers are: ".concat(_toConsumableArray(numbers[Symbol.it
   end: 30,
   step: 4
 }))));
-},{"./styles.css":"src/styles.css","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function generatorExample() {
+  return regeneratorRuntime.wrap(function generatorExample$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return 4;
+
+        case 2:
+          _context2.next = 4;
+          return 5;
+
+        case 4:
+          _context2.next = 6;
+          return 6;
+
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _marked);
+}
+
+var generator = generatorExample();
+console.log(generator.next());
+console.log('hello world');
+console.log(generator.next());
+console.log('hello again');
+console.log(generator.next());
+console.log('hello and done');
+console.log(generator.next());
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Async iterators *for await of*');
+var store = (0, _fakeData.default)();
+console.log(store);
+
+var customers = _defineProperty({}, Symbol.iterator, function () {
+  var i = 0;
+  return {
+    next: function () {
+      var _next2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
+        var customer;
+        return regeneratorRuntime.wrap(function _callee2$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                i++;
+                _context3.next = 3;
+                return store.get('customer', i);
+
+              case 3:
+                customer = _context3.sent;
+
+                if (customer) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return", {
+                  done: true
+                });
+
+              case 6:
+                _context3.next = 8;
+                return store.get('food', i);
+
+              case 8:
+                customer.foods = _context3.sent;
+                return _context3.abrupt("return", {
+                  value: customer,
+                  done: false
+                });
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function next() {
+        return _next2.apply(this, arguments);
+      }
+
+      return next;
+    }()
+  };
+});
+
+_asyncToGenerator(
+/*#__PURE__*/
+regeneratorRuntime.mark(function _callee3() {
+  var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _value, _customer;
+
+  return regeneratorRuntime.wrap(function _callee3$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _iteratorNormalCompletion = true;
+          _didIteratorError = false;
+          _context4.prev = 2;
+          _iterator = _asyncIterator(customers);
+
+        case 4:
+          _context4.next = 6;
+          return _iterator.next();
+
+        case 6:
+          _step = _context4.sent;
+          _iteratorNormalCompletion = _step.done;
+          _context4.next = 10;
+          return _step.value;
+
+        case 10:
+          _value = _context4.sent;
+
+          if (_iteratorNormalCompletion) {
+            _context4.next = 17;
+            break;
+          }
+
+          _customer = _value;
+          console.log(_customer);
+
+        case 14:
+          _iteratorNormalCompletion = true;
+          _context4.next = 4;
+          break;
+
+        case 17:
+          _context4.next = 23;
+          break;
+
+        case 19:
+          _context4.prev = 19;
+          _context4.t0 = _context4["catch"](2);
+          _didIteratorError = true;
+          _iteratorError = _context4.t0;
+
+        case 23:
+          _context4.prev = 23;
+          _context4.prev = 24;
+
+          if (!(!_iteratorNormalCompletion && _iterator.return != null)) {
+            _context4.next = 28;
+            break;
+          }
+
+          _context4.next = 28;
+          return _iterator.return();
+
+        case 28:
+          _context4.prev = 28;
+
+          if (!_didIteratorError) {
+            _context4.next = 31;
+            break;
+          }
+
+          throw _iteratorError;
+
+        case 31:
+          return _context4.finish(28);
+
+        case 32:
+          return _context4.finish(23);
+
+        case 33:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _callee3, null, [[2, 19, 23, 33], [24,, 28, 32]]);
+}))();
+
+console.log(customer.next);
+},{"./styles.css":"src/styles.css","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./fakeData":"src/fakeData.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1436,7 +1674,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58655" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50472" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,5 +1,7 @@
 import './styles.css';
 import 'regenerator-runtime/runtime';
+import createStore from './fakeData';
+import { async } from 'regenerator-runtime/runtime';
 
 document.getElementById('app').innerHTML = `
 <h1>Hello Algorithms!</h1>
@@ -443,3 +445,55 @@ console.log(
     ...numbers[Symbol.iterator]({ start: 6, end: 30, step: 4 })
   ]}`
 );
+
+function* generatorExample() {
+  yield 4;
+  yield 5;
+  yield 6;
+}
+
+const generator = generatorExample();
+
+console.log(generator.next());
+console.log('hello world');
+console.log(generator.next());
+console.log('hello again');
+console.log(generator.next());
+console.log('hello and done');
+console.log(generator.next());
+
+console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Async iterators *for await of*');
+
+const store = createStore();
+console.log(store);
+
+const customers = {
+  [Symbol.iterator]: function() {
+    let i = 0;
+    return {
+      next: async function() {
+        i++;
+        const customer = await store.get('customer', i);
+
+        if (!customer) {
+          return { done: true };
+        }
+
+        customer.foods = await store.get('food', i);
+
+        return {
+          value: customer,
+          done: false
+        };
+      }
+    };
+  }
+};
+
+(async function() {
+  for await (const customer of customers) {
+    console.log(customer);
+  }
+})();
+
+console.log(customer.next);
